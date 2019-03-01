@@ -1,6 +1,7 @@
 package ru.avalon.java.ocpjp.labs;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Properties;
@@ -24,6 +25,11 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         /*
          * TODO #01 Подключите к проекту все библиотеки, необходимые для соединения с СУБД.
+         */
+        /*
+         * Database: PostgreSQL
+         * Version: 11
+         * Driver: postgresql-42.2.2.jar
          */
         try (Connection connection = getConnection()) {
             ProductCode code = new ProductCode("MO", 'N', "Movies");
@@ -56,10 +62,7 @@ public class Main {
      * @return URL в виде объекта класса {@link String}
      */
     private static String getUrl() {
-        /*
-         * TODO #02 Реализуйте метод getUrl
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return "jdbc:postgresql://localhost:5432/ocpjp_lab3_db";
     }
     /**
      * Возвращает параметры соединения
@@ -68,10 +71,11 @@ public class Main {
      * password
      */
     private static Properties getProperties() {
-        /*
-         * TODO #03 Реализуйте метод getProperties
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        Properties owner = new Properties();
+        owner.setProperty("user", "postgres");
+        owner.setProperty("password", "admin");
+        return owner;
+
     }
     /**
      * Возвращает соединение с базой данных Sample
@@ -80,10 +84,7 @@ public class Main {
      * @throws SQLException 
      */
     private static Connection getConnection() throws SQLException {
-        /*
-         * TODO #04 Реализуйте метод getConnection
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return DriverManager.getConnection(getUrl(), getProperties());
     }
     
 }
